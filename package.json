@@ -56,6 +56,6 @@
   "scripts": {
     "build": "gulp package",
     "test": "gulp tests",
-    "postinstall": "if [ ! -d node_modules ]; then npm i --quiet; fi && gulp package"
+    "prepare": "gulp package"
   }
 }
