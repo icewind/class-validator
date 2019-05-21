@@ -1,5 +1,6 @@
 {
   "name": "class-validator",
+  "main": "./build/package/index.js",
   "private": true,
   "version": "0.9.1",
   "description": "Class-based validation with Typescript / ES6 / ES5 using decorators or validation schemas. Supports both node.js and browser",
@@ -16,12 +17,7 @@
   "bugs": {
     "url": "https://github.com/pleerock/class-validator/issues"
   },
-  "tags": [
-    "validator",
-    "validation",
-    "typescript",
-    "typescript-validator"
-  ],
+  "tags": ["validator", "validation", "typescript", "typescript-validator"],
   "dependencies": {
     "@types/validator": "9.4.2",
     "google-libphonenumber": "^3.1.6",
@@ -59,6 +55,7 @@
   },
   "scripts": {
     "build": "gulp package",
-    "test": "gulp tests"
+    "test": "gulp tests",
+    "postinstall": "if [ ! -d node_modules ]; then npm ci --quiet; fi && gulp package"
   }
 }
