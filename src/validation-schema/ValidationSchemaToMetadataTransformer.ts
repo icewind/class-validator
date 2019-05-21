@@ -1,21 +1,24 @@
-import {ValidationSchema} from "./ValidationSchema";
-import {ValidationMetadata} from "../metadata/ValidationMetadata";
-import {ValidationMetadataArgs} from "../metadata/ValidationMetadataArgs";
-import {ValidationOptions} from "../decorator/ValidationOptions";
-import {ValidationTypes} from "../validation/ValidationTypes";
+import { ValidationOptions } from "../decorator/ValidationOptions";
+import { ValidationMetadata } from "../metadata/ValidationMetadata";
+import { ValidationMetadataArgs } from "../metadata/ValidationMetadataArgs";
+import { ValidationTypes } from "../validation/ValidationTypes";
+import { ValidationSchema } from "./ValidationSchema";
 
 /**
  * Used to transform validation schemas to validation metadatas.
  */
 export class ValidationSchemaToMetadataTransformer {
-
     transform(schema: ValidationSchema): ValidationMetadata[] {
         const metadatas: ValidationMetadata[] = [];
         Object.keys(schema.properties).forEach(property => {
             schema.properties[property].forEach(validation => {
                 if (!ValidationTypes.isValid(validation.type))
-                    throw new Error(`Validation schema ${schema.name}#${property} as incorrect type ${validation.type}`);
-                
+                    throw new Error(
+                        `Validation schema ${
+                            schema.name
+                        }#${property} as incorrect type ${validation.type}`
+                    );
+
                 const validationOptions: ValidationOptions = {
                     message: validation.message,
                     groups: validation.groups,
@@ -27,6 +30,7 @@ export class ValidationSchemaToMetadataTransformer {
                     target: schema.name,
                     propertyName: property,
                     constraints: validation.constraints,
+                    constraintCls: validation.constraintCls,
                     validationTypeOptions: validation.options,
                     validationOptions: validationOptions
                 };
@@ -35,5 +39,4 @@ export class ValidationSchemaToMetadataTransformer {
         });
         return metadatas;
     }
-
 }
