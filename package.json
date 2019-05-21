@@ -56,6 +56,6 @@
   "scripts": {
     "build": "gulp package",
     "test": "gulp tests",
-    "postinstall": "if [ ! -d node_modules ]; then npm ci --quiet; fi && gulp package"
+    "postinstall": "cd ./node_modules/class-validator && if [ ! -d node_modules ]; then npm ci --quiet; fi && gulp package"
   }
 }
