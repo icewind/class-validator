@@ -55,6 +55,6 @@
   "scripts": {
     "build": "gulp package",
     "test": "gulp tests",
-    "prepare": "gulp package"
+    "prepare": "./node_modules/.bin/gulp package"
   }
 }
